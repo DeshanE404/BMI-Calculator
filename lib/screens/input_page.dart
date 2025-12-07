@@ -25,7 +25,6 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black26,
         title: const Text(
           'BMI CALCULATOR',
           style: TextStyle(
@@ -99,14 +98,14 @@ class _InputPageState extends State<InputPage> {
                   ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
-                      activeTrackColor: Colors.white,
-                      inactiveTrackColor: Color(0xFF8D8E98),
-                      thumbColor: Color(0xFFEB1555),
-                      overlayColor: Color(0x29EB1555),
+                      activeTrackColor: const Color(0xFF4CAF50),  // Green for active track
+                      inactiveTrackColor: const Color(0xFF1A4A56),  // Dark teal for inactive
+                      thumbColor: const Color(0xFF4CAF50),  // Green thumb
+                      overlayColor: const Color(0x294CAF50),  // Green overlay with transparency
                       thumbShape:
-                      RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      const RoundSliderThumbShape(enabledThumbRadius: 15.0),
                       overlayShape:
-                      RoundSliderOverlayShape(overlayRadius: 30.0),
+                      const RoundSliderOverlayShape(overlayRadius: 30.0),
                     ),
                     child: Slider(
                       value: height.toDouble(),
@@ -146,7 +145,9 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.minus,
                               onPressed: () {
                                 setState(() {
-                                  weight--;
+                                  if (weight > 1) {
+                                    weight--;
+                                  }
                                 });
                               },
                             ),
@@ -158,7 +159,9 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.plus,
                               onPressed: () {
                                 setState(() {
-                                  weight++;
+                                  if (weight < 300) {
+                                    weight++;
+                                  }
                                 });
                               },
                             )
@@ -186,7 +189,9 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.minus,
                               onPressed: () {
                                 setState(() {
-                                  age--;
+                                  if (age > 1) {
+                                    age--;
+                                  }
                                 });
                               },
                             ),
@@ -195,7 +200,9 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.plus,
                               onPressed: () {
                                 setState(() {
-                                  age++;
+                                  if (age < 150) {
+                                    age++;
+                                  }
                                 });
                               },
                             ),
@@ -219,7 +226,8 @@ class _InputPageState extends State<InputPage> {
                 MaterialPageRoute(builder: (context) => ResultsPage(
                   bmiResult: calc.calculateBMI(),
                   resultText: calc.getResult(),
-                  interpatation: calc.getInterpretation(),
+                  interpretation: calc.getInterpretation(),
+                  resultColor: calc.getResultColor(),
                 )),
               );
             },

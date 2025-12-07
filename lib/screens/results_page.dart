@@ -2,14 +2,20 @@ import 'package:bmi_calculator/reuseable_card.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../bottom_button.dart';
+import '../calculator_brain.dart';
 
 class ResultsPage extends StatelessWidget {
-   ResultsPage({required this.bmiResult,required this.interpatation,required this.resultText});
-
+   ResultsPage({
+    required this.bmiResult,
+    required this.interpretation,
+    required this.resultText,
+    required this.resultColor,
+  });
 
   final String bmiResult;
   final String resultText;
-  final String interpatation;
+  final String interpretation;
+  final Color resultColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +32,21 @@ class ResultsPage extends StatelessWidget {
               colour: kActiveCardColour,cardChild: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[Text(resultText.toUpperCase(),style: kResultTextStyle,),
-        Text(bmiResult,style: kBmiStyle,),
-        Text(interpatation,
+      children: <Widget>[
+        Text(
+          resultText.toUpperCase(),
+          style: TextStyle(
+            color: resultColor,
+            fontSize: 22.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(bmiResult, style: kBmiStyle),
+        Text(
+          interpretation,
           textAlign: TextAlign.center,
-          style: kBodyTextStyle,)
+          style: kBodyTextStyle,
+        )
 
       ],
     )),
